@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Webapp Hub - Home</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.png">
+    <link rel="stylesheet" href="/static/bootstrap-5.2.0-beta1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/xfab_color.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <link rel="stylesheet" href="/static/bootstrap-icons-1.8.2/bootstrap-icons.css">
+
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/bootstrap-5.2.0-beta1/js/bootstrap.min.js"></script>
+    <script src="/static/js/bg_status_check.js"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="/static/js/elastic-apm-rum.umd.min.js"></script>
+    <script>
+        elasticApm.init({
+            serviceName: "ds-p-apm-webapp_hub_services",
+            environment: "production",
+            serverUrl: "https://1cf613e43ed348859ecf54d0bac7c480.apm.westeurope.azure.elastic-cloud.com:443",
+        })
+    </script>
+
+</head>
+<body class="bg-light" onload="call_system_status(); updateLinkColor()">
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container">
+            <a class="navbar-brand" href="/home">            
+                Webapp Hub
+                
+            </a>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/system_status?ft=Prod">System Status</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/register">Add Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/about">About</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" method="POST" action="" enctype="multipart/form-data">
+                    <input id="csrf_token" name="csrf_token" type="hidden" value="IjAyMTYxZGNhNjEwZTIyN2JkYWRlNDdhMWJkZmI1OGRhYmQ4YjAwMmYi.Y3IKrg.moIXFHbx5tJG_ZwGbCJIDe9yBrs">
+
+                    <input class="form-control me-2" id="search_text" name="search_text" placeholder="Search" type="text" value="">
+                    <input class="btn btn-xprimary my-2 my-sm-0" id="submit_search" name="submit_search" type="submit" value="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    
+
+<div class="bg-white">
+    <div class="container">
+        <div class="px-4 py-5" id="featured-3">
+            <h2 class="pb-2 border-bottom display-4 text-xprimary font-weight-normal">
+                <svg width="114px" height="50px" viewBox="0 0 114 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Logo-White_BG-Petrol" fill="#007A9D">
+                            <g id="_208013424">
+                                <path d="M38.1769,41.7402 L38.1769,16.6994 L33.2145,16.6994 L30.3662,16.6994 L33.2145,12.8914 L38.1769,12.8914 L38.1769,10.3526 C38.1769,7.1985 39.1289,4.8329 41.0331,3.2558 C42.9373,1.6787 45.5434,0.8902 48.8517,0.8902 L49.1979,0.8902 L49.1979,4.9868 L48.6209,4.9868 C46.6205,4.9868 45.1011,5.4387 44.0624,6.3426 C43.0238,7.2466 42.5045,8.6986 42.5045,10.6988 L42.5045,12.8914 L45.8512,12.8914 L45.8512,16.6994 L42.5045,16.6994 L42.5045,41.7402 L38.1769,41.7402 Z" id="_208842840"></path>
+                                <polygon id="_208843368" points="0.6926 41.7402 11.829 26.8542 1.385 12.8914 6.9244 12.8914 14.3679 23.7962 21.7537 12.8914 27.293 12.8914 16.8491 26.8542 35.8641 49.486 30.4038 49.486 14.3679 29.9699 6.1743 41.7402"></polygon>
+                                <path d="M63.175,42.2216 C60.3669,42.2216 57.9146,41.558 55.8181,40.231 C53.7216,38.9039 52.0964,37.1057 50.9423,34.8363 C49.7882,32.5669 49.2112,30.0666 49.2112,27.3355 C49.2112,24.5661 49.7882,22.0562 50.9423,19.806 C52.0964,17.5558 53.7216,15.7671 55.8181,14.4401 C57.9146,13.1131 60.3669,12.4495 63.175,12.4495 C65.5601,12.4495 67.6084,12.9112 69.3202,13.8343 C71.0321,14.7575 72.4265,16.0076 73.5036,17.5846 L73.5036,12.9112 L77.8313,12.9112 L77.8313,41.76 L73.5036,41.76 L73.5036,37.1441 C72.4265,38.6828 71.0321,39.9137 69.3202,40.8368 C67.6084,41.76 65.5601,42.2216 63.175,42.2216 Z M63.7521,38.2982 C65.9063,38.2982 67.7238,37.7981 69.2048,36.798 C70.6859,35.7979 71.8111,34.4613 72.5804,32.788 C73.3497,31.1147 73.7344,29.2972 73.7344,27.3355 C73.7344,25.3353 73.3497,23.5082 72.5804,21.8543 C71.8111,20.2003 70.6859,18.8733 69.2048,17.8731 C67.7238,16.8731 65.9063,16.373 63.7521,16.373 C61.6363,16.373 59.8091,16.8731 58.2704,17.8731 C56.7316,18.8733 55.5584,20.2003 54.7506,21.8543 C53.9428,23.5082 53.5389,25.3353 53.5389,27.3355 C53.5389,29.2972 53.9428,31.1147 54.7506,32.788 C55.5584,34.4613 56.7316,35.7979 58.2704,36.798 C59.8091,37.7981 61.6363,38.2982 63.7521,38.2982 Z" id="_208013352" fill-rule="nonzero"></path>
+                                <path d="M99.877,42.2216 C97.492,42.2216 95.4436,41.76 93.7318,40.8368 C92.02,39.9137 90.6255,38.6828 89.5484,37.1441 L89.5484,41.76 L85.2208,41.76 L85.2208,1.3716 L89.5484,1.3716 L89.5484,17.5846 C90.6255,16.0076 92.02,14.7575 93.7318,13.8343 C95.4436,12.9112 97.492,12.4495 99.877,12.4495 C102.6851,12.4495 105.1375,13.1131 107.234,14.4401 C109.3304,15.7671 110.9558,17.5558 112.1098,19.806 C113.2638,22.0562 113.8408,24.5661 113.8408,27.3355 C113.8408,30.0666 113.2638,32.5669 112.1098,34.8363 C110.9558,37.1057 109.3304,38.9039 107.234,40.231 C105.1375,41.558 102.6851,42.2216 99.877,42.2216 Z M99.3,38.2982 C101.4542,38.2982 103.291,37.7981 104.8105,36.798 C106.33,35.7979 107.4936,34.4613 108.3014,32.788 C109.1092,31.1147 109.5131,29.2972 109.5131,27.3355 C109.5131,25.3353 109.1092,23.5082 108.3014,21.8543 C107.4936,20.2003 106.33,18.8733 104.8105,17.8731 C103.291,16.8731 101.4542,16.373 99.3,16.373 C97.1842,16.373 95.3763,16.8731 93.8761,17.8731 C92.3758,18.8733 91.2411,20.2003 90.4716,21.8543 C89.7023,23.5082 89.3176,25.3353 89.3176,27.3355 C89.3176,29.2972 89.7023,31.1147 90.4716,32.788 C91.2411,34.4613 92.3758,35.7979 93.8761,36.798 C95.3763,37.7981 97.1842,38.2982 99.3,38.2982 Z" id="_208013304" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                Webapp Hub
+                <p class="lead text-dark">Design Support, NVM Development, and Process Characterization</p>
+            </h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3 border-bottom">
+                <div class="feature col">
+                    <div class="badge d-inline-flex align-items-center justify-content-center bg-xcyan-light bg-gradient text-white fs-2 mb-3">
+                        <i class="bi bi-plug"></i>
+                    </div>
+                    <h2>Service Status</h2>
+                    <p>This page will give you an overview about webapps and services running in Design Support, NVM Development, and Process Characterization.</p>
+                    <a href="/system_status?ft=Prod" class="icon-link link-xprimary d-inline-flex align-items-center">
+                        See the system status
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="feature col">
+                    <div class="badge d-inline-flex align-items-center justify-content-center bg-xcyan-light bg-gradient text-white fs-2 mb-3">
+                        <i class="bi bi-node-plus"></i>
+                    </div>
+                    <h2>Add New Services</h2>
+                    <p>Register new services and webapps to the overview. Feel free to add your own apps. It will help you to collect them and find them easily later.</p>
+                    <a href="/register" class="icon-link link-xprimary d-inline-flex align-items-center">
+                        Add your own service to the list
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="feature col">
+                    <div class="badge d-inline-flex align-items-center justify-content-center bg-xcyan-light bg-gradient text-white fs-2 mb-3">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <h2>Search & Filter</h2>
+                    <p>You're looking for a specific service or webapp? Use the search and filter capabilities to find exactly what you're looking for!</p>
+                    <a href="/search_result" class="icon-link link-xprimary d-inline-flex align-items-center">
+                        Search for services
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-3">
+                <small class="text-muted">
+                    Most of these webapps/services are self developed and accessible company-wide, e.g. XDocGen, FirstTimeRight, JupyterHub, or the DBI.
+                    Do you have questions? Just <a href="/about#contact" class="link-xprimary">contact us</a>!
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NOTE: List of services -->
+<div>
+    <div class="container pt-5">
+        <h2 class="pb-2 m-0 border-bottom"><i class="bi bi-patch-check-fill me-2 text-xcyan-light"></i>Production</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        DS Runset Index
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev04.xfab.ads:2221"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        First Time Right
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01.xfab.ads:1221"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        IP Replacement Data
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev05.xfab.ads:908"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Jira
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="https://jira.xfab.ads:443"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        JupyterHub
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="https://rs24:443"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Kibana
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="https://xedes.kb.westeurope.azure.elastic-cloud.com:9243"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        R/Shiny Apps
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://kch-da-dev.xfab.ads:30009"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        RelXplorer
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="https://relxplorer.xfab.com/"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Runset List
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://sp.erf.xfab.de/RandD/DesSup/UploadDocuments/runsets.html"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        SpecDB API
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:90"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        SpecXplorer 
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://specxplorer.xfab.ads/"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        TestChipXplorer 
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-tchip01.xfab.ads/TestChipXplorer"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Webapp Hub
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01.xfab.ads:1331"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        X-FAB Color &amp; Brand Template
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev03.xfab.ads:8080"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        XConvert
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:85"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        XDocGen
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://xdocgen/"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Xkit Sync Webapp
+                        <a  class="text-xprimary d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:91"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+        </div>
+
+        <h2 class="pb-2 m-0 border-bottom"><i class="bi bi-wrench-adjustable me-2 text-xsecondary"></i>Development</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        DBI
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-tchip01.xfab.ads/DBI_test/"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        FTR Elastic
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:1222"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Jenkins
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://10.49.10.53:8080"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Kibana
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="https://erf-docgen01.thesys.de:93"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Portainer (RnD)
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev02.xfab.ads:9000"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        SpecDB API
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:909"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Swarmpit (RnD)
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev03.xfab.ads:888"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Update Reports
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-rnddev03.xfab.ads:9990"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        XConvert
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:86"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        XDocgen
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-docgen01.thesys.de:80"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+                <div class="col">
+                    <div class="list-group-item border rounded-3 p-3 bg-white">
+                        Xkit Sync Webapp
+                        <a class="text-danger d-block small opacity-75 stretched-link text-decoration-none"
+                        href="http://erf-datamin01:92"
+                        target="_blank">Open tab<i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+                
+            
+                
+            
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="container">
+
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 pt-5 my-5 border-top">
+            <div class="col mb-3">
+                <a href="/home" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                    <svg width="114px" height="50px" viewBox="0 0 114 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Logo-White_BG-Petrol" fill="#007A9D">
+                                <g id="_208013424">
+                                    <path d="M38.1769,41.7402 L38.1769,16.6994 L33.2145,16.6994 L30.3662,16.6994 L33.2145,12.8914 L38.1769,12.8914 L38.1769,10.3526 C38.1769,7.1985 39.1289,4.8329 41.0331,3.2558 C42.9373,1.6787 45.5434,0.8902 48.8517,0.8902 L49.1979,0.8902 L49.1979,4.9868 L48.6209,4.9868 C46.6205,4.9868 45.1011,5.4387 44.0624,6.3426 C43.0238,7.2466 42.5045,8.6986 42.5045,10.6988 L42.5045,12.8914 L45.8512,12.8914 L45.8512,16.6994 L42.5045,16.6994 L42.5045,41.7402 L38.1769,41.7402 Z" id="_208842840"></path>
+                                    <polygon id="_208843368" points="0.6926 41.7402 11.829 26.8542 1.385 12.8914 6.9244 12.8914 14.3679 23.7962 21.7537 12.8914 27.293 12.8914 16.8491 26.8542 35.8641 49.486 30.4038 49.486 14.3679 29.9699 6.1743 41.7402"></polygon>
+                                    <path d="M63.175,42.2216 C60.3669,42.2216 57.9146,41.558 55.8181,40.231 C53.7216,38.9039 52.0964,37.1057 50.9423,34.8363 C49.7882,32.5669 49.2112,30.0666 49.2112,27.3355 C49.2112,24.5661 49.7882,22.0562 50.9423,19.806 C52.0964,17.5558 53.7216,15.7671 55.8181,14.4401 C57.9146,13.1131 60.3669,12.4495 63.175,12.4495 C65.5601,12.4495 67.6084,12.9112 69.3202,13.8343 C71.0321,14.7575 72.4265,16.0076 73.5036,17.5846 L73.5036,12.9112 L77.8313,12.9112 L77.8313,41.76 L73.5036,41.76 L73.5036,37.1441 C72.4265,38.6828 71.0321,39.9137 69.3202,40.8368 C67.6084,41.76 65.5601,42.2216 63.175,42.2216 Z M63.7521,38.2982 C65.9063,38.2982 67.7238,37.7981 69.2048,36.798 C70.6859,35.7979 71.8111,34.4613 72.5804,32.788 C73.3497,31.1147 73.7344,29.2972 73.7344,27.3355 C73.7344,25.3353 73.3497,23.5082 72.5804,21.8543 C71.8111,20.2003 70.6859,18.8733 69.2048,17.8731 C67.7238,16.8731 65.9063,16.373 63.7521,16.373 C61.6363,16.373 59.8091,16.8731 58.2704,17.8731 C56.7316,18.8733 55.5584,20.2003 54.7506,21.8543 C53.9428,23.5082 53.5389,25.3353 53.5389,27.3355 C53.5389,29.2972 53.9428,31.1147 54.7506,32.788 C55.5584,34.4613 56.7316,35.7979 58.2704,36.798 C59.8091,37.7981 61.6363,38.2982 63.7521,38.2982 Z" id="_208013352" fill-rule="nonzero"></path>
+                                    <path d="M99.877,42.2216 C97.492,42.2216 95.4436,41.76 93.7318,40.8368 C92.02,39.9137 90.6255,38.6828 89.5484,37.1441 L89.5484,41.76 L85.2208,41.76 L85.2208,1.3716 L89.5484,1.3716 L89.5484,17.5846 C90.6255,16.0076 92.02,14.7575 93.7318,13.8343 C95.4436,12.9112 97.492,12.4495 99.877,12.4495 C102.6851,12.4495 105.1375,13.1131 107.234,14.4401 C109.3304,15.7671 110.9558,17.5558 112.1098,19.806 C113.2638,22.0562 113.8408,24.5661 113.8408,27.3355 C113.8408,30.0666 113.2638,32.5669 112.1098,34.8363 C110.9558,37.1057 109.3304,38.9039 107.234,40.231 C105.1375,41.558 102.6851,42.2216 99.877,42.2216 Z M99.3,38.2982 C101.4542,38.2982 103.291,37.7981 104.8105,36.798 C106.33,35.7979 107.4936,34.4613 108.3014,32.788 C109.1092,31.1147 109.5131,29.2972 109.5131,27.3355 C109.5131,25.3353 109.1092,23.5082 108.3014,21.8543 C107.4936,20.2003 106.33,18.8733 104.8105,17.8731 C103.291,16.8731 101.4542,16.373 99.3,16.373 C97.1842,16.373 95.3763,16.8731 93.8761,17.8731 C92.3758,18.8733 91.2411,20.2003 90.4716,21.8543 C89.7023,23.5082 89.3176,25.3353 89.3176,27.3355 C89.3176,29.2972 89.7023,31.1147 90.4716,32.788 C91.2411,34.4613 92.3758,35.7979 93.8761,36.798 C95.3763,37.7981 97.1842,38.2982 99.3,38.2982 Z" id="_208013304" fill-rule="nonzero"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+                <div class="text-muted">
+                    <div>Created with ❤️ and ☕</div>
+                    <div>© 2020-2022 X-FAB Global Services GmbH <span class="fw-bold">@DesignSupport</span></div>
+                </div>
+            </div>
+        
+            <div class="col mb-3">
+            </div>
+        
+            <div class="col mb-3">
+                <h5>Navigation</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/home" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="/system_status?ft=Prod" class="nav-link p-0 text-muted">Status</a></li>
+                    <li class="nav-item mb-2"><a href="/register" class="nav-link p-0 text-muted">Add Service</a></li>
+                    <li class="nav-item mb-2"><a href="/about" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+        
+            <div class="col mb-3">
+                <h5>Ressources</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/register" class="nav-link p-0 text-muted">Add Service</a></li>
+                    <li class="nav-item mb-2"><a href="/system_status?ft=Prod" class="nav-link p-0 text-muted">Production Status</a></li>
+                    <li class="nav-item mb-2"><a href="/system_status?ft=Devel" class="nav-link p-0 text-muted">Development Status</a></li>
+                    <li class="nav-item mb-2"><a href="/search_result?q=" class="nav-link p-0 text-muted">Search</a></li>
+                </ul>
+            </div>
+        
+            <div class="col mb-3">
+                <h5>About</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="/about#release-notes" class="nav-link p-0 text-muted">Release Notes</a></li>
+                    <li class="nav-item mb-2"><a href="/about#contact" class="nav-link p-0 text-muted">Contact</a></li>
+                    <li class="nav-item mb-2"><a href="https://jira.xfab.ads/browse/DSOT-1939" target="_blank" class="nav-link p-0 text-muted">Report Issue</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
